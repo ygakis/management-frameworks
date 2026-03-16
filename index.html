@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Management Frameworks — CEO Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f4f0e8;
+    --rule: #0e0e0e;
+    --dim: #6b6560;
+    --s1: #1a1a2e;   /* strategic — deep navy */
+    --s2: #2d1b4e;   /* prioritization — deep plum */
+    --s3: #0d2b1f;   /* execution — deep green */
+    --s4: #2b1a0d;   /* documentation — deep amber */
+    --s5: #1a0d2b;   /* AI native — deep violet */
+    --s1l: #e8eaf6;
+    --s2l: #ede7f6;
+    --s3l: #e8f5e9;
+    --s4l: #fff3e0;
+    --s5l: #f3e5f5;
+    --s1a: #3f51b5;
+    --s2a: #7b1fa2;
+    --s3a: #2e7d32;
+    --s4a: #e65100;
+    --s5a: #6a1b9a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .page {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 36px 40px;
+  }
+
+  /* HEADER */
+  header {
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding: 16px 0 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  header h1 span {
+    font-style: italic;
+    color: var(--dim);
+  }
+
+  .meta {
+    text-align: right;
+    color: var(--dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    line-height: 1.8;
+  }
+
+  /* STACK LABEL */
+  .layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    display: inline-block;
+    margin-bottom: 6px;
+    border-radius: 2px;
+  }
+
+  .layer-strategic   .layer-label { background: var(--s1); color: #c5cae9; }
+  .layer-priority    .layer-label { background: var(--s2); color: #e1bee7; }
+  .layer-execution   .layer-label { background: var(--s3); color: #c8e6c9; }
+  .layer-docs        .layer-label { background: var(--s4); color: #ffe0b2; }
+  .layer-ai          .layer-label { background: var(--s5); color: #e1bee7; }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 20px;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11.5px;
+  }
+
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid var(--ink);
+    background: var(--paper);
+  }
+
+  thead th:first-child { width: 90px; }
+  thead th:nth-child(2) { width: 26%; }
+  thead th:nth-child(3) { width: 16%; }
+  thead th:nth-child(4) { width: 16%; }
+  thead th:nth-child(5) { width: auto; }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: rgba(0,0,0,0.025); }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  td {
+    padding: 8px 10px;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  /* ACRONYM CELL */
+  .acronym {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .acr-full {
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* COLOR DOTS PER LAYER */
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  .layer-strategic   td.acronym .dot { background: var(--s1a); }
+  .layer-priority    td.acronym .dot { background: var(--s2a); }
+  .layer-execution   td.acronym .dot { background: var(--s3a); }
+  .layer-docs        td.acronym .dot { background: var(--s4a); }
+  .layer-ai          td.acronym .dot { background: var(--s5a); }
+
+  /* AI NATIVE CELL */
+  td.ai-native {
+    font-style: italic;
+    color: #3b2a6e;
+  }
+
+  /* BORDER ACCENT */
+  .layer-strategic   table thead { border-top: 2px solid var(--s1a); }
+  .layer-priority    table thead { border-top: 2px solid var(--s2a); }
+  .layer-execution   table thead { border-top: 2px solid var(--s3a); }
+  .layer-docs        table thead { border-top: 2px solid var(--s4a); }
+  .layer-ai          table thead { border-top: 2px solid var(--s5a); }
+
+  /* STACK DIAGRAM */
+  .stack {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    overflow: hidden;
+    border-radius: 3px;
+    margin-bottom: 28px;
+  }
+
+  .stack-item {
+    flex: 1;
+    padding: 6px 10px;
+    text-align: center;
+    color: white;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .stack-item:not(:last-child) {
+    border-right: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .stack-item span {
+    display: block;
+    font-size: 8px;
+    font-weight: 300;
+    opacity: 0.75;
+    margin-top: 2px;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--ink);
+    margin-top: 24px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--dim);
+  }
+
+  /* PRINT */
+  @media print {
+    body { font-size: 10px; }
+    .page { padding: 20px; }
+    header h1 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;margin-bottom:6px;">CEO Reference · Management Frameworks</div>
+      <h1>The Management Stack<br><span>Strategic to Operational</span></h1>
+    </div>
+    <div class="meta">
+      Aipropria / Lanalis SA<br>
+      Discovery Session · Feb 2026<br>
+      5 Layers · 18 Frameworks
+    </div>
+  </header>
+
+  <!-- STACK DIAGRAM -->
+  <div class="stack">
+    <div class="stack-item" style="background:var(--s1a);">Strategic<span>OKR · KPI · OODA · JTBD</span></div>
+    <div class="stack-item" style="background:var(--s2a);">Prioritization<span>RICE · ICE · MoSCoW · WSJF</span></div>
+    <div class="stack-item" style="background:var(--s3a);">Execution<span>Agile · Scrum · Kanban · Design Thinking</span></div>
+    <div class="stack-item" style="background:var(--s4a);">Documentation<span>SOP · PRD · RACI</span></div>
+    <div class="stack-item" style="background:var(--s5a);">AI Native<span>PDCA · OODA · E-P-E-V</span></div>
+  </div>
+
+  <!-- LAYER 1: STRATEGIC -->
+  <div class="section layer-strategic">
+    <div class="layer-label">Layer 1 — Strategic Direction</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Acronym</th>
+          <th>What it is</th>
+          <th>Origin</th>
+          <th>Who uses it</th>
+          <th>AI-Native Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="acronym"><span class="dot"></span>OKR<span class="acr-full">Objectives &<br>Key Results</span></td>
+          <td>Set a qualitative Objective (direction) + 3–5 measurable Key Results that prove you got there. KRs are outcomes, never tasks. Reviewed quarterly.</td>
+          <td>Andy Grove / Intel 1970s. John Doerr brought to Google 1999.</td>
+          <td>Tech CEOs, startups, product teams. Now spreading to all industries.</td>
+          <td class="ai-native">System prompt + success criteria. The Objective = agent goal; KRs = verification conditions Claude checks against.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>KPI<span class="acr-full">Key Performance<br>Indicator</span></td>
+          <td>Ongoing vital signs of the business. Revenue, churn, conversion, margin. Always-on metrics, not change targets. KPIs tell you if the machine is healthy; OKRs tell you where you're going.</td>
+          <td>Management science, 1970s. Peter Drucker lineage.</td>
+          <td>Every business, every level. Finance, ops, marketing, sales.</td>
+          <td class="ai-native">Evaluation metrics in AI benchmarking. The numbers you define to assess whether an AI workflow is performing.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>OODA<span class="acr-full">Observe · Orient<br>Decide · Act</span></td>
+          <td>Decision loop. Whoever cycles through it faster gains advantage. Orientation is the critical step — it filters what you observe through mental models and experience. Disrupting your opponent's loop is strategy.</td>
+          <td>Col. John Boyd, USAF, 1960s–70s. F-86 vs MiG-15 analysis.</td>
+          <td>Military, competitive strategy, trading, crisis management.</td>
+          <td class="ai-native">Agentic reasoning loop. Real-time AI agents operate as OODA machines — observe context, orient via model, decide action, act via tool use.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>JTBD<span class="acr-full">Jobs To<br>Be Done</span></td>
+          <td>People don't buy products — they hire them to do a job. "What job is this customer firing their old solution to hire mine for?" Reframes product thinking from features to purpose.</td>
+          <td>Clayton Christensen, Harvard. Popularized in <em>The Innovator's Dilemma</em>, 1997.</td>
+          <td>Product managers, marketers, brand strategists, founders.</td>
+          <td class="ai-native">Prompt intention modeling. Before writing a prompt, ask: what job is this prompt hired to do? Prevents feature-thinking ("add more detail") vs. outcome-thinking.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LAYER 2: PRIORITIZATION -->
+  <div class="section layer-priority">
+    <div class="layer-label">Layer 2 — Prioritization</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Acronym</th>
+          <th>What it is</th>
+          <th>Origin</th>
+          <th>Who uses it</th>
+          <th>AI-Native Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="acronym"><span class="dot"></span>RICE<span class="acr-full">Reach × Impact ×<br>Confidence ÷ Effort</span></td>
+          <td>Scoring model for ranking competing initiatives. Reach = users affected/period. Impact = 0.25–3 scale. Confidence = % certainty in estimates. Effort = person-months. Forces explicit, comparable assumptions.</td>
+          <td>Sean McBride, Intercom, ~2016.</td>
+          <td>Product managers, growth teams, startup founders.</td>
+          <td class="ai-native">Prompt ROI assessment. Before building an AI workflow, score it: how many tasks does it reach, what's the impact, how confident are you it'll work, how long to build.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>ICE<span class="acr-full">Impact ·<br>Confidence · Ease</span></td>
+          <td>Lighter RICE. Three factors, no Reach. Fast relative ranking. Good for solo operators and small teams where precision is less important than speed of decision.</td>
+          <td>Sean Ellis (growth hacking community), ~2015.</td>
+          <td>Solo founders, growth hackers, small teams, content strategists.</td>
+          <td class="ai-native">Quick prompt triage. Rate each AI task idea: will it matter (I), does it work reliably (C), how fast to implement (E). Your daily filter.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>MoSCoW<span class="acr-full">Must · Should ·<br>Could · Won't</span></td>
+          <td>Requirements categorization. The discipline is committing to "Won't Have" — explicit de-scoping. Prevents scope creep by making trade-offs visible. Run at project start, revisit each sprint.</td>
+          <td>Dai Clegg, Oracle UK, 1994. Part of DSDM framework.</td>
+          <td>Project managers, business analysts, product teams, clients.</td>
+          <td class="ai-native">Constraint declaration in prompts. Explicitly stating Won't = better outputs. "Do not include X, Y, Z" is MoSCoW applied to AI instruction design.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>WSJF<span class="acr-full">Weighted Shortest<br>Job First</span></td>
+          <td>Enterprise-grade prioritization. Score = Cost of Delay ÷ Job Size. Prioritizes high-value, fast-to-deliver items. Accounts for the cost of waiting, not just value of doing.</td>
+          <td>Don Reinertsen, Lean product development. Used in SAFe framework.</td>
+          <td>Large Agile organizations, enterprise PMs, program-level planning.</td>
+          <td class="ai-native">Workflow sequencing for AI pipelines. Which automation to build first based on time-cost of doing it manually vs. build effort.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LAYER 3: EXECUTION -->
+  <div class="section layer-execution">
+    <div class="layer-label">Layer 3 — Execution Methodology</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Acronym / Method</th>
+          <th>What it is</th>
+          <th>Origin</th>
+          <th>Who uses it</th>
+          <th>AI-Native Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="acronym"><span class="dot"></span>Agile<span class="acr-full">Philosophy, not<br>an acronym</span></td>
+          <td>Manifesto-level philosophy: ship working increments fast, adapt via feedback, prefer collaboration over documentation. A reaction against Waterfall rigidity. Scrum and Kanban are implementations of it.</td>
+          <td>Agile Manifesto, Snowbird Utah, Feb 2001. 17 software practitioners.</td>
+          <td>Software teams universally. Now spreading into marketing, operations, design.</td>
+          <td class="ai-native">Iterative prompting. Don't prompt for the final output — prompt for drafts, review, iterate. Agile applied to human-AI co-creation.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>Scrum<span class="acr-full">Roles · Sprints<br>· Ceremonies</span></td>
+          <td>Agile's structured implementation. Roles: Product Owner (what to build), Scrum Master (remove blockers), Dev Team (build). Rhythm: Sprint (2-week cycle), Daily Standup (15 min sync), Sprint Review (demo), Retrospective (learn).</td>
+          <td>Ken Schwaber & Jeff Sutherland, 1990s. Named after rugby formation.</td>
+          <td>Software dev teams, product companies, increasingly marketing and ops.</td>
+          <td class="ai-native">Structured AI session design. Sprint = context window. Standup = status prompt. Review = verification step. You as Product Owner, Claude as Dev Team.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>Kanban<span class="acr-full">Visual pull<br>system</span></td>
+          <td>Visual board: To Do → In Progress → Done. No fixed sprints — continuous flow. Manage by limiting work-in-progress (WIP limits). Pull new work only when capacity opens. Less ceremony than Scrum.</td>
+          <td>Toyota Production System, 1940s. Taiichi Ohno. Adapted to software by David Anderson, 2004.</td>
+          <td>Operations teams, service teams, solo operators, support workflows.</td>
+          <td class="ai-native">Task queue management for AI agents. Limit concurrent agent tasks. Visual tracking of which automations are in progress vs. queued.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>Design Thinking<span class="acr-full">Empathize · Define<br>Ideate · Prototype · Test</span></td>
+          <td>Human-centered problem solving. Start with Empathy (understand the real user), Define the actual problem, Ideate broadly, Prototype fast, Test with real users. Bias toward action and iteration over analysis paralysis.</td>
+          <td>IDEO, Stanford d.school. David Kelley, 1980s–90s.</td>
+          <td>Designers, product teams, innovation consultants, strategy consultants.</td>
+          <td class="ai-native">Prompt design methodology. Empathize = who is the end user of this output? Define = what's the real job? Prototype = test prompt variants. Test = eval with real examples.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>Waterfall<span class="acr-full">Sequential<br>phases</span></td>
+          <td>Classic linear model: Requirements → Design → Build → Test → Deploy. Each phase complete before the next begins. Works when requirements are stable (construction, manufacturing). Fails when they change (software, creative work).</td>
+          <td>Winston Royce, 1970. Originally described as flawed — the industry adopted it anyway.</td>
+          <td>Construction, government contracts, regulated industries, hardware.</td>
+          <td class="ai-native">Single-shot prompting. Define everything upfront, generate once, deliver. Valid for stable, well-specified tasks. Fails for complex, exploratory AI work.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LAYER 4: DOCUMENTATION -->
+  <div class="section layer-docs">
+    <div class="layer-label">Layer 4 — Process Documentation &amp; Coordination</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Acronym</th>
+          <th>What it is</th>
+          <th>Origin</th>
+          <th>Who uses it</th>
+          <th>AI-Native Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="acronym"><span class="dot"></span>SOP<span class="acr-full">Standard Operating<br>Procedure</span></td>
+          <td>A repeatable recipe for a known, solved problem. Write it once, replicate the outcome without rethinking. Encodes institutional knowledge. Protects against key-person dependency. The foundation of operational scale.</td>
+          <td>Military/industrial management. W. Edwards Deming lineage. Pre-WWII origins.</td>
+          <td>Operations managers, quality control, manufacturing, healthcare, any repeatable process.</td>
+          <td class="ai-native">Reusable system prompt / skill file. Your Claude Code skills and SOP.md files are exactly this — write the procedure once for the AI to follow consistently.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>PRD<span class="acr-full">Product Requirements<br>Document</span></td>
+          <td>Upstream document that defines what to build and why before building starts. Covers: problem statement, user needs, success criteria, scope, constraints, non-goals. Prevents building the wrong thing with precision.</td>
+          <td>Silicon Valley product management culture, 1980s–90s. Formalized at companies like Apple and Netscape.</td>
+          <td>Product managers, founders, engineering leads, startup CTOs.</td>
+          <td class="ai-native">System prompt for a product. A PRD written clearly is a near-complete brief for an AI to build or spec a product. Also: the design doc for AI workflow architecture.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>RACI<span class="acr-full">Responsible ·<br>Accountable ·<br>Consulted · Informed</span></td>
+          <td>Coordination matrix. For every task/decision: R = who does the work, A = who owns the outcome (one person), C = who gives input, I = who gets notified. Eliminates ambiguity about who decides. "Too many A's" = organizational dysfunction.</td>
+          <td>Management consulting, 1950s–60s. Popularized in project management literature.</td>
+          <td>Project managers, operations leads, consultants, HR, any cross-functional work.</td>
+          <td class="ai-native">Human-AI task assignment protocol. For each workflow: R = Claude agent, A = you as CEO, C = tools/MCPs consulted, I = outputs delivered. Design before you build.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- LAYER 5: AI NATIVE -->
+  <div class="section layer-ai">
+    <div class="layer-label">Layer 5 — AI-Native Cognitive Loops</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Acronym</th>
+          <th>What it is</th>
+          <th>Origin</th>
+          <th>Who uses it</th>
+          <th>AI-Native Equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="acronym"><span class="dot"></span>PDCA<span class="acr-full">Plan · Do<br>Check · Act</span></td>
+          <td>The original iterative improvement loop. Plan what you'll do. Do it. Check results against expectations. Act on what you learned — standardize if it worked, adjust if it didn't. Every Agile sprint is a PDCA cycle. Foundation of quality management.</td>
+          <td>W. Edwards Deming (called it Shewhart Cycle). Rebuilt Japanese manufacturing post-WWII.</td>
+          <td>Quality managers, operations teams, manufacturing, process improvement everywhere.</td>
+          <td class="ai-native"><em>This IS the AI-native loop.</em> Prompt (Plan) → Generate (Do) → Evaluate output (Check) → Refine prompt (Act). Your iterative prompting discipline, formalized.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>E·P·E·V<span class="acr-full">Explore · Plan<br>Execute · Verify</span></td>
+          <td>Agentic AI execution protocol. Explore = read codebase/context before acting. Plan = think through approach, declare steps. Execute = make changes. Verify = confirm outputs match intent. Prevents the AI equivalent of cutting before measuring.</td>
+          <td>Emergent from LLM/agent engineering practice, 2023–24. Claude Code, Cursor, agentic frameworks.</td>
+          <td>AI engineers, developers using Claude Code / Cursor / Copilot Workspace, prompt architects.</td>
+          <td class="ai-native"><em>Native.</em> This is PDCA at AI timescale — one context window instead of one quarter. Design your Claude Code tasks to explicitly trigger each phase before the next.</td>
+        </tr>
+        <tr>
+          <td class="acronym"><span class="dot"></span>OODA<span class="acr-full">(repeated at<br>AI layer)</span></td>
+          <td>At the AI layer, OODA describes real-time agent reasoning. The agent observes the environment (tool outputs, file states), orients via its model, decides the next action, acts via tool call. Faster loop = more adaptive agent. Disrupting the loop = hallucination or context loss.</td>
+          <td>Col. John Boyd (see Layer 1) — but its AI application is fully emergent, 2023–present.</td>
+          <td>AI researchers, agent architects, anyone building multi-step agentic workflows.</td>
+          <td class="ai-native"><em>Native at this layer.</em> Design agentic workflows to maintain loop integrity: don't interrupt Orientation with conflicting context. Context window hygiene = loop hygiene.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <div>5 Layers · Strategic → Prioritization → Execution → Documentation → AI-Native</div>
+    <div>Discovery session · Aipropria · Feb 2026</div>
+  </footer>
+
+</div>
+</body>
+</html>
